@@ -12,12 +12,6 @@ async function getAuthHeader() {
     return authHeader;
 }
 
-/* async function getProfile() {
-    const profile = await SecureStore.getItemAsync("profile");
-
-    return profile;
-} */
-
 async function getUserId() {
     const userId = await SecureStore.getItemAsync("userId");
 

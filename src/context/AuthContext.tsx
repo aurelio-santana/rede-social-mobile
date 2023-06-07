@@ -10,8 +10,6 @@ interface AuthContext {
     userId: string;
     email: string;
     name: string;
-    //user: string; //email
-    //profile: string; //schema_id_user
     errorMessage: string;
     isLoading: boolean;
     login?: () => void;
@@ -25,8 +23,6 @@ const defaultValue = {
     userId: "",
     email: "",
     name: "",
-    //user: "", //email
-    //profile: "",
     errorMessage: "",
     isLoading: true,
 };
@@ -48,36 +44,26 @@ const Provider = ({ children }: { children: ReactNode}) => {
                     errorMessage: action.payload,
                     isLoading: false,
                 };
-
-            case "user_created":
-                
+            case "user_created":       
                 return { ... state, errorMessage: "", ... action.payload };
             case "logout":
                 return { token: "", userId: "", email: "", name: "", errorMessage: "", isLoading: false };
-                //{profile: ""},
             default:
                 return state;
         }
     };
 
-    
-
     const [state, dispatch] = useReducer(reducer, defaultValue);
-
     const login = async (auth: Auth) => {
-        console.log("data :", auth);
-
             try {
 
                 const { data } = await api.post("/authentication", auth);
                 const userId = data.userId;
-                //const { user, profile } = jwtDecode(data.token) as UserToken; email e schema_id_profile
-                console.log("user id ata", userId);
+            
                 await SecureStore.setItemAsync("token", data.token);
                 await SecureStore.setItemAsync("userId", userId);
                 await SecureStore.setItemAsync("email", auth.email);
-                //await SecureStore.setItemAsync("user", user);
-                //await SecureStore.setItemAsync("profile", profile);
+
                 let name;
                 if (data.token != null) {
                     const { data } = await api.get("/user/get", {params: {email: auth.email}});
@@ -90,8 +76,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
                     payload: { 
                         token: data.token,
                         userId: data.userId,
-                        //profile: profile, 
-                        //user: user,
                         email: auth.email,
                         name: name,
                         isLoading: false,
@@ -99,7 +83,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
                 });
 
             } catch(err) {
-                //console.log(JSON.stringify(err));
                 console.log(err);
                 dispatch({
                     type: "add_error",
@@ -115,7 +98,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
             const userId = await SecureStore.getItemAsync("userId");
             const email = await SecureStore.getItemAsync("email");
             const name = await SecureStore.getItemAsync("name");
-            //const profile = await SecureStore.getItemAsync("profile");
 
             dispatch({ type: "login",
                 payload: {
@@ -134,7 +116,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
     };
 
     const register = async(auth: Auth) => {
-
         try {
             await api.post("/user/create", auth);
             dispatch({
@@ -156,7 +137,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
             await SecureStore.deleteItemAsync("userId");
             await SecureStore.deleteItemAsync("email");
             await SecureStore.deleteItemAsync("name");
-            //await SecureStore.deleteItemAsync("profile");
 
             dispatch({
                 type: "logout"

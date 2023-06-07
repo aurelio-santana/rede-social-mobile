@@ -14,7 +14,6 @@ function TextInputRoot(props: TextInputRootProps) {
 }
 
 interface TextInputInputProps extends TextInputProps {
-
 }
 
 function TextInputInput(props: TextInputInputProps) {

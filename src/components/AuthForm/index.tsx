@@ -15,18 +15,13 @@ import { Auth } from "../../Model/Auth";
 interface AuthFormProps {
     authFormSubtitle: string;
     submitFormButtonText: string;
-    //routeName: string;
     submitFormButtonAction: (auth: Auth) => void;
 }
 
 
 export function AuthForm(props: AuthFormProps) {
-
-    //const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
- 
 
     return (
 
@@ -38,24 +33,6 @@ export function AuthForm(props: AuthFormProps) {
             <Image source={logo} resizeMethod="scale" />
             <Heading title="Sysmap Parrot" subtitle={props.authFormSubtitle} />
 
-            {/* {props.routeName == "/signup" ? ("") : (
-            <div>
-                <Input.Root>
-                    <Input.Icon>
-                        <Envelope color={THEME.COLORS.INPUT} />
-                        <Input.Input
-                            value={name}
-                            onChangeText={setName}
-                            placeholder="Nome"
-                            autoCapitalize="none"
-                            autoCorrect={false}
-                        />
-                    </Input.Icon>
-                </Input.Root>
-                <Spacer />
-            </div>
-            )}
- */}
             <Input.Root>
                 <Input.Icon>
                     <Envelope color={THEME.COLORS.INPUT} />
@@ -88,5 +65,4 @@ export function AuthForm(props: AuthFormProps) {
             }} />
         </KeyboardAvoidingView>
     );
-
 }

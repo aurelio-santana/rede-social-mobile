@@ -18,7 +18,6 @@ const { login, errorMessage } = useContext(AuthContext);
             <AuthForm 
                 authFormSubtitle="Faça o login e comece a usar!"
                 submitFormButtonText="Entrar"
-                //routeName="/signup"
                 submitFormButtonAction={login}
             />
             <TouchableOpacity 

@@ -14,10 +14,7 @@ interface PostItemProps {
     post: Post;
 }
 
-
-
 export function PostItem({ post }: PostItemProps) {
-    //const { profile } = useContext(AuthContext);
     const { likePost, unlikePost } =  useContext(PostContext);
     const { userId } = useContext(AuthContext);
 
@@ -30,8 +27,6 @@ export function PostItem({ post }: PostItemProps) {
             likePost({ postId: post.id });
         }
     }
-
-    console.log("post desc", post.content);
 
     return (
         <View style={styles.container}>
@@ -48,7 +43,6 @@ export function PostItem({ post }: PostItemProps) {
                 ) : (
                     <Text style={styles.description}>{post.content}</Text>
                 )}
-
 
 
             </Spacer>

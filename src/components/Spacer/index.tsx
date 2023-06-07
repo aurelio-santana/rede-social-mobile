@@ -6,7 +6,6 @@ interface SpaceProps {
     children?: ReactNode;
 }
 
-
 export function Spacer(props: SpaceProps) {
     return <View style={styles.container}>{props.children}</View>;
 

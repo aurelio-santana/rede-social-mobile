@@ -13,7 +13,6 @@ import { Spacer } from "../../components/Spacer";
             <AuthForm
                 authFormSubtitle="Faça o cadastro e comece a usar!"
                 submitFormButtonText="Cadastrar"
-                //routeName="/login"
                 submitFormButtonAction={register}
             />
             <TouchableOpacity 

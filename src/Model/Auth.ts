@@ -6,6 +6,4 @@ export interface Auth {
 
 export interface UserToken {
     userId: string;
-/*     profile: string;
-    user: string; */
 }

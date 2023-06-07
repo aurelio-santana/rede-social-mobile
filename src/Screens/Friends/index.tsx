@@ -15,13 +15,10 @@ function Friends() {
         },
     };
 
-
     useEffect(() => {
         const getProfiles = async () => {
             try {
                 const { data } = await api.get("/user/get/all", authHeader); 
-                //const { data } = await api.get("/profiles", authHeader);
-
                 setProfilesList(data.users);
             } catch (err) {}
         };

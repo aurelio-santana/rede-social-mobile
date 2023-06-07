@@ -19,16 +19,3 @@ export interface Post {
 
     createdAt: string; 
 }
-
-/* export interface Post {
-    _id: string,
-    title: string,
-    description: string,
-    profile: {
-        name: string;
-    };
-    comments: [];
-    likes: string[];
-    image: boolean; 
-} */
-
