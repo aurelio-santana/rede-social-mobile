@@ -83,7 +83,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
                 });
 
             } catch(err) {
-                console.log(err);
                 dispatch({
                     type: "add_error",
                     payload: "Houve um erro no login."
@@ -93,7 +92,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
 
     const tryLocalLogin = async () => {
         try {
-            console.log("tryLocalLogin");
             const token = await SecureStore.getItemAsync("token");
             const userId = await SecureStore.getItemAsync("userId");
             const email = await SecureStore.getItemAsync("email");
@@ -105,13 +103,10 @@ const Provider = ({ children }: { children: ReactNode}) => {
                     userId: userId,
                     email: email,
                     name: name,
-                    //profile,
-                    //user,
                     isLoading: false,
                 },
             });
         } catch (err) {
-            console.log(err);
         }
     };
 
@@ -146,7 +141,6 @@ const Provider = ({ children }: { children: ReactNode}) => {
         }
     };
     
-
     return (
         <Context.Provider
             value={{

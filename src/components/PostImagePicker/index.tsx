@@ -10,10 +10,8 @@ interface PostImagePickerProps {
     onFileLoaded: (file: File) => void;
 }
 
-
 export default function PostImagePicker({onFileLoaded}: PostImagePickerProps) {
     const [image, setImage] = useState(null);
-
 
 const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -22,8 +20,6 @@ const pickImage = async () => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.canceled) {
         const { uri } = result.assets[0];

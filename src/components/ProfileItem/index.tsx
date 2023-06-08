@@ -20,9 +20,8 @@ interface Profile {
 
 export function ProfileItem({ profile, handleFollowAction }: ProfileItemProps) {  //buttonDisabled props
 
-
-
-    /*  fazer um get da lista de follow, ou modificar o back para rentornar junto
+    /* TODO 
+    fazer um get da lista de follow, ou modificar o back para rentornar junto
     ao getusers
     
     const getFollowers = async () => {
@@ -41,7 +40,6 @@ export function ProfileItem({ profile, handleFollowAction }: ProfileItemProps) {
             alert("Erro ao obter o Feed.");
         }
     }; */
-
 
     return (
         <View style={styles.profileCard}>

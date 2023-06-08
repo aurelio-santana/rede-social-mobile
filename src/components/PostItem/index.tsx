@@ -20,10 +20,8 @@ export function PostItem({ post }: PostItemProps) {
 
     function handleLike() {
         if (post.like.includes(userId)) {
-            console.log("postid postitem",post.id);
             unlikePost({ postId: post.id });
         } else {
-            console.log("postid postitem",post.id);
             likePost({ postId: post.id });
         }
     }
@@ -37,8 +35,7 @@ export function PostItem({ post }: PostItemProps) {
             <Spacer>
                 <Text style={styles.postTitle}>{post.title}</Text>
                 <Spacer />
-                {post.image ? (
-                    
+                {post.image ? (    
                     <Image source={{ uri: "https://t.ctcdn.com.br/essK16aBUDd_65hp5umT3aMn_i8=/400x400/smart/filters:format(webp)/i606944.png" }} style={styles.image} />
                 ) : (
                     <Text style={styles.description}>{post.content}</Text>

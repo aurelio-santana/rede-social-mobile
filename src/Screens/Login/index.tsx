@@ -4,13 +4,10 @@ import { Context as AuthContext } from "../../context/AuthContext";
 import { Text } from "react-native";
 
 import { styles } from "./styles";
-
 import { AuthForm } from "../../components/AuthForm";
 import { Spacer } from "../../components/Spacer";
 
-
 function Login({ navigation }) {
-
 const { login, errorMessage } = useContext(AuthContext);
 
     return (

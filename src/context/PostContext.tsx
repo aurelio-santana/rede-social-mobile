@@ -5,7 +5,6 @@ import api from "../../services/api";
 import { navigate } from "../RootNavigation";
 import { getAuthHeader, getEmail, getName, getUserId } from "../../services/auth";
 
-
 interface PostContext {
     posts: Post[];
     getPosts?: () => void;
@@ -17,7 +16,6 @@ interface PostContext {
 const defaultValue = {
     posts: [],
 };
-
 
 const Context = React.createContext<PostContext>(defaultValue);
 
@@ -34,7 +32,6 @@ const Provider = ({ children }: { children: ReactNode }) => {
                 const [postLiked, ... _] = newPostsLike.filter(
                     (post) => post.id == action.payload.id
                 );
-                console.log("postid1", action.payload.id);
                 postLiked.like.push(action.payload.userId);    
                 return { posts: [ ... newPostsLike] };
             case "unlike_post":
@@ -66,7 +63,6 @@ const Provider = ({ children }: { children: ReactNode }) => {
     };
 
     const likePost = async ({ postId }) => {
-        console.log("post id", postId);
         try {
             const userId = await getUserId();
             api.put(`/post/${postId}/like?userId=${userId}`);
@@ -81,7 +77,6 @@ const Provider = ({ children }: { children: ReactNode }) => {
         try {
             const userId = await getUserId();
             api.put(`/post/${postId}/like?userId=${userId}`);
-            console.log("passou aqui");
             dispatch({
                 type: "unlike_post",
                 payload: { id: postId, userId },
@@ -94,7 +89,6 @@ const Provider = ({ children }: { children: ReactNode }) => {
             const userId = await getUserId(); 
             let formData;
             if (image) {
-                console.log("com file");
                 formData = {
                     title: title,
                     content: content || "",
@@ -102,7 +96,6 @@ const Provider = ({ children }: { children: ReactNode }) => {
                     file: image
                 };
                 } else {
-                    console.log("sem file");
                     formData = {
                     title: title,
                     content: content,
