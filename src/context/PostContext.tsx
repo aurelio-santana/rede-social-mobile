@@ -93,7 +93,7 @@ const Provider = ({ children }: { children: ReactNode }) => {
                     title: title,
                     content: content || "",
                     userId: userId,
-                    file: image
+                    fileList: image
                 };
                 } else {
                     formData = {
@@ -105,10 +105,14 @@ const Provider = ({ children }: { children: ReactNode }) => {
             const name = await getName();
             const { data } = await api.post("/post/create", formData);
             const newPost = await api.get("/post/get", {params: {id: data}});
+
+            if (state.posts == undefined) {
+                state.posts = [] as Post[];
+            }
             
             dispatch({
                 type: "create_post",
-                payload: { ... newPost.data, name: name },
+                payload: { ... newPost.data, name: name }
             });
             navigate("PostList");
         } catch (err) {
