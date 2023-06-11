@@ -4,6 +4,8 @@ import { Post } from "../Model/Post";
 import api from "../../services/api";
 import { navigate } from "../RootNavigation";
 import { getAuthHeader, getEmail, getName, getUserId } from "../../services/auth";
+import { List } from "phosphor-react-native";
+import { formToJSON } from "axios";
 
 interface PostContext {
     posts: Post[];
@@ -87,23 +89,42 @@ const Provider = ({ children }: { children: ReactNode }) => {
     const createPost = async ({ title, content, image }) => {
         try {
             const userId = await getUserId(); 
-            let formData;
+            /* let formData;
+            const images = [image];
+            console.log("images", images)
             if (image) {
                 formData = {
                     title: title,
                     content: content || "",
                     userId: userId,
-                    fileList: image
+                    //fileList: image
                 };
-                } else {
-                    formData = {
-                    title: title,
-                    content: content,
-                    userId: userId,
-                    }
+            } else {
+                formData = {
+                title: title,
+                content: content,
+                userId: userId,
                 }
+            }
+            const request = formData */
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("userId", userId);
+            formData.append("content", content || "");
+            formData.append("fileList", image);
+            const request = formData
+            
+
+        
             const name = await getName();
-            const { data } = await api.post("/post/create", formData);
+            //const { data } = await api.post("/post/create", null, {params: {request: formData}});
+            const { data } = await api.post("/post/create", formData, {
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "multipart/form-data",
+                }
+            });
+            console.log("data", data)
             const newPost = await api.get("/post/get", {params: {id: data}});
 
             if (state.posts == undefined) {

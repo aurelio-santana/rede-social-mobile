@@ -15,7 +15,7 @@ export interface Post {
     ];
     like: string[];
     likes: number;
-    image: boolean;
+    image: string;
 
     createdAt: string; 
 }

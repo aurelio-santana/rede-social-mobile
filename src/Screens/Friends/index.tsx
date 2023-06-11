@@ -19,7 +19,7 @@ function Friends() {
         const getProfiles = async () => {
             try {
                 const { data } = await api.get("/user/get/all", authHeader); 
-                setProfilesList(data.users);
+                setProfilesList(data.users);   
             } catch (err) {}
         };
         
@@ -27,8 +27,12 @@ function Friends() {
     }, []);
 
     async function handleFollow(profileId: string) {
+        console.log("profileçlist", profilesList);
         try {
-            await api.post(`/profiles/${profileId}/follow`, null, authHeader);
+            
+            const { data } = await api.get("/user/follow/get/userjoin");
+            console.log("userjoin", data);
+            //await api.post(`/profiles/${profileId}/follow`, null, authHeader);
             setProfilesList((profiles) => {
                 const newProfiles = profiles.map((profile) => {
                     if (profile._id == profileId) {
