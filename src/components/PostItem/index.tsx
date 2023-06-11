@@ -36,7 +36,7 @@ export function PostItem({ post }: PostItemProps) {
                 <Text style={styles.postTitle}>{post.title}</Text>
                 <Spacer />
                 {post.image ? (    
-                    <Image source={{ uri: "https://t.ctcdn.com.br/essK16aBUDd_65hp5umT3aMn_i8=/400x400/smart/filters:format(webp)/i606944.png" }} style={styles.image} />
+                    <Image source={{ uri: post.image }} style={styles.image} />
                 ) : (
                     <Text style={styles.description}>{post.content}</Text>
                 )}
