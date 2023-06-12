@@ -23,6 +23,7 @@ export  const THEME = {
         BLACK: "Inter_900Black",
     },
     FONT_SIZE: {
+        TN: 10,
         SM: 14,
         MD: 16,
         LG: 24,

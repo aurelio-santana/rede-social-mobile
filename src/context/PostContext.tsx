@@ -58,7 +58,13 @@ const Provider = ({ children }: { children: ReactNode }) => {
         try {
             const userId = await getUserId();           
             const { data } = await api.get("/post/feed", {params: {userId: userId}});
-            dispatch({ type: "show_posts", payload: data.posts[0] });
+
+            const feed: Post[] = []
+            data.posts.forEach((post: Post[]) => {
+                feed.push(... post);
+            });
+
+            dispatch({ type: "show_posts", payload: feed });
         } catch (err) {
             alert("Erro ao obter o Feed.");
         }

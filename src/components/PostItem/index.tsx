@@ -33,8 +33,48 @@ export function PostItem({ post }: PostItemProps) {
     }
 
     function handleUri(){
-        //TODO realcoar para o back.
+        //TODO realocar para o backend.
+        if (post.photoUri == "") {
+            return
+        }
         return post.photoUri[0].substring(post.photoUri[0].lastIndexOf(":"));
+    }
+
+    function handleCreatedAt(createdAt: string) {
+        const currDate = Date.now();
+        const postDate = new Date(createdAt).getTime();
+        const difDate = currDate - postDate;
+
+        switch(true) {
+            case (difDate<60000):
+                return "agora"; //seconds
+
+            case (difDate<3600000): { //36 = 1hr  
+                const time = Math.floor(difDate/60000)
+                if (time == 1)
+                    return `há ${time} minuto`
+                else return `há ${time} minutos`
+            }
+            case (difDate<86400000): { //86 = 24hr
+                const time = Math.floor(difDate/3600000)
+                if (time == 1)
+                    return `há ${time} hora`
+                else return `há ${time} horas`
+            }
+            case (difDate<2592000000): { //25 = 30d
+                const time = Math.floor(difDate/86400000)
+                if (time == 1)
+                    return `há ${time} dia`
+                else return `há ${time} dias`
+            }
+            case (difDate>=2592000000): { //86 = 24hr
+                const time = Math.floor(difDate/2592000000)
+                if (time == 1)
+                    return `há ${time} mês`
+                else return `há ${time} meses`
+            }
+            default: return "erro na data"
+        }
     }
 
     return (
@@ -44,9 +84,15 @@ export function PostItem({ post }: PostItemProps) {
                 <Text style={styles.profileName}>{post.name}</Text>
             </View>
             <Spacer>
-                <Text style={styles.postTitle}>{post.title}</Text>
+                <View style={styles.createdAt}>
+                    <Text style={styles.postTitle}>{post.title}</Text>
+                    <Text style={styles.timeText}>
+                        <Text>{"   •   "}</Text>
+                        {handleCreatedAt(post.createdAt)}
+                    </Text>
+                </View>
                 <Spacer />
-                {post.photoUri ? (    
+                {!(post.photoUri == "") ? (    
                     <View>
                         <Text style={styles.description}>{post.content}</Text>
                         <Image source={{ uri: `${localhostIp}${handleUri()}` }} style={styles.image} />
@@ -54,8 +100,6 @@ export function PostItem({ post }: PostItemProps) {
                 ) : (
                     <Text style={styles.description}>{post.content}</Text>
                 )}
-
-
             </Spacer>
             <View style={styles.footer}>
                 <Chat size={24} color="white" weight="thin" />

@@ -49,4 +49,13 @@ export const styles = StyleSheet.create({
         marginHorizontal: 4,
         marginEnd: 4,
     },
+    createdAt: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    timeText: {
+        fontFamily: THEME.FONT_FAMILY.REGULAR,
+        fontSize: THEME.FONT_SIZE.TN,
+        color: "#A7A7A7",
+    }
 });

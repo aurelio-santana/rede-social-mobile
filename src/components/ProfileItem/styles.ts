@@ -23,12 +23,13 @@ export const styles = StyleSheet.create({
         fontFamily: THEME.FONT_FAMILY.REGULAR,
         fontSize: THEME.FONT_SIZE.SM,
         marginStart: 8,
+        marginTop: 4,
     },
     following: {
         color: THEME.COLORS.TEXT,
         fontFamily: THEME.FONT_FAMILY.REGULAR,
         fontSize: THEME.FONT_SIZE.SM,
         marginStart: 8,
+        marginBottom: 8,
     },
-
 });
