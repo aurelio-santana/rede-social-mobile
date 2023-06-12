@@ -1,3 +1,4 @@
+import { REACT_APP_LOCALHOST_IP } from "@env";
 import { useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Context as AuthContext } from "../../context/AuthContext";
@@ -10,6 +11,10 @@ import { Post } from "../../Model/Post";
 import { Image } from "react-native";
 import { getUserId } from "../../../services/auth";
 
+
+const localhostIp = REACT_APP_LOCALHOST_IP;
+
+
 interface PostItemProps {
     post: Post;
 }
@@ -17,6 +22,7 @@ interface PostItemProps {
 export function PostItem({ post }: PostItemProps) {
     const { likePost, unlikePost } =  useContext(PostContext);
     const { userId } = useContext(AuthContext);
+    
 
     function handleLike() {
         if (post.like.includes(userId)) {
@@ -24,6 +30,11 @@ export function PostItem({ post }: PostItemProps) {
         } else {
             likePost({ postId: post.id });
         }
+    }
+
+    function handleUri(){
+        //TODO realcoar para o back.
+        return post.photoUri[0].substring(post.photoUri[0].lastIndexOf(":"));
     }
 
     return (
@@ -35,8 +46,11 @@ export function PostItem({ post }: PostItemProps) {
             <Spacer>
                 <Text style={styles.postTitle}>{post.title}</Text>
                 <Spacer />
-                {post.image ? (    
-                    <Image source={{ uri: post.image }} style={styles.image} />
+                {post.photoUri ? (    
+                    <View>
+                        <Text style={styles.description}>{post.content}</Text>
+                        <Image source={{ uri: `${localhostIp}${handleUri()}` }} style={styles.image} />
+                    </View>
                 ) : (
                     <Text style={styles.description}>{post.content}</Text>
                 )}

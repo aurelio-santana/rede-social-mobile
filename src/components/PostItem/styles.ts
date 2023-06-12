@@ -29,6 +29,7 @@ export const styles = StyleSheet.create({
         resizeMode: "cover",
         height: 240,
         borderRadius: 12,
+        marginTop: 12,
     },
     description: {
         fontFamily: THEME.FONT_FAMILY.REGULAR,
